@@ -1,0 +1,48 @@
+.alert{
+    position: relative;
+    padding: $alert-padding-y $alert-padding-x;
+    margin-bottom: $alert-margin-bottom;
+    border: $alert-border-width solid transparent;
+    border-radius: $alert-border-radius;
+    .alert-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: $alert-padding-y $alert-padding-x;
+        color: inherit;
+        cursor: pointer;
+      }
+      .alert-children {
+        font-size: $alert-description-font-size;
+        margin: $alert-description-top-margin 0 0;
+      }
+      .alert-title {
+        font-weight: $font-weight-bold;
+      }
+
+}
+$alert-colors: 
+(
+  "default":    $primary,
+  "success":    $success,
+  "warning":    $warning,
+  "danger":     $danger,
+);
+
+
+
+.alert-success{
+    @include alert-style($success, $success, $success) 
+}
+
+.alert-danger{
+    @include alert-style($danger, $danger, $white) 
+}
+
+
+//$color 和 $value 是循环中的变量，分别代表当前的键和值。
+@each $color, $value in $alert-colors {
+    .alert-#{$color} {
+      @include alert-style($value, darken($value, 5%), $white);
+    }
+  }

@@ -1,0 +1,107 @@
+.menu{
+    display: flex;  //flex box
+    flex-wrap: wrap; //nowrap全部排列在一行，wrap自动换行
+    padding-left: 0;
+    margin-bottom: 30px;
+    list-style: none;
+    border-bottom: $menu-border-width solid $menu-border-color;
+    box-shadow: $menu-box-shadow;
+
+    .menu-item{
+        padding: $menu-item-padding-y $menu-item-padding-x;
+        transition: $menu-transition;
+
+        //&:hover 和 &:focus 是用于定义元素在特定状态下的样式的选择器
+        //&:hover 选择器用于定义当用户将鼠标悬停在元素上时的样式
+        //&:focus 选择器用于定义当元素获得焦点时的样式
+        &:hover,&:focus{
+            text-decoration: none; //去除下划线
+        }
+        &.is-disable{
+            color: $menu-item-disabled-color;
+            pointer-events: none;
+            cursor: default;
+        }
+        &.is-active,&:hover{
+            color:$menu-item-active-color;
+            border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
+        }
+    }
+    .submenu-item {
+        position: relative;
+        .submenu-title {   //鼠标悬停时向上旋转
+          display: flex;
+          align-items: center;
+        }
+        .arrow-icon {
+          transition: transform .25s ease-in-out;  //添加动画，0.25s旋转
+          margin-left: 3px; //稍微离开title
+        }
+        &:hover {
+          .arrow-icon {
+            transform: rotate(180deg); //向上旋转180度
+          }
+        }
+        
+      }
+      .is-vertical{
+        .arrow-icon{
+          transform: rotate(0deg) !important;
+        }
+      }
+    
+      .is-vertical.is-opened{
+        .arrow-icon{
+          transform: rotate(180deg) !important;
+        }
+      }
+      .submenu {
+        display: none;
+        list-style:none;
+        padding-left: 0;
+        white-space: nowrap;
+        transition: $menu-transition;
+        .menu-item {
+          padding: $menu-item-padding-y $menu-item-padding-x;
+          cursor: pointer;
+          transition: $menu-transition;
+          color: $body-color;
+          &.is-active, &:hover {
+            color: $menu-item-active-color !important;
+          }
+        }
+      }
+}
+//解决方案：display none变display block + opacity=0，动画效果 opacity=1，使用react库react trasition
+.submenu.menu-opened {   //display从none变成block
+    display: block;
+  }
+.menu-vertical{
+    flex-direction: column;
+    border-bottom: 0px;
+    margin:10px 20px;
+    border-right: $menu-border-width solid $menu-border-color;
+    .menu-item{
+        border-left: $menu-border-width solid transparent;
+        &.is-active,&:hover{
+            border-bottom: 0px;
+            border-left: $menu-item-active-border-width solid $menu-item-active-color;;
+        }
+    }
+}
+
+.menu-horizontal {
+    >.menu-item {
+      border-bottom: $menu-item-active-border-width solid transparent;
+    }
+    .submenu {
+      position: absolute;
+      background: $white;
+      z-index: 100;
+      top: calc(100% + 8px);
+      left: 0;
+      border: $menu-border-width solid $menu-border-color;
+      box-shadow: $submenu-box-shadow;
+    }
+  }
+

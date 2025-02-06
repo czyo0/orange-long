@@ -1,0 +1,56 @@
+
+  /* 导航区域 */
+  .tabs-nav {
+    display: flex;    //默认情况下，<ul> 元素的子元素（<li>）是垂直排列的。通过 display: flex;，可以让导航项（<li>）水平排列。
+    flex-wrap: wrap;  //允许换行
+    padding-left: 0;   
+    margin-bottom: 0;   //去除边距，更紧凑
+    list-style: none;  //移除列表项的默认样式（如小圆点）
+    //solid 指的是一种实线边框
+    border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;  //在导航区域下方添加一条底部边框，用于区分导航区域和内容区域。
+  }
+
+  .tabs-content {
+    margin-top: $nav-tabs-content-margin;
+  }
+
+  .tabs-nav-item {
+    display: block; //将导航项设置为块级元素，使其在布局中独占一行。
+    padding: $nav-link-padding-y $nav-link-padding-x;  //设置导航项的内边距，分别控制垂直和水平方向的间距。
+    cursor: pointer;  //当鼠标悬停在导航项上时，显示手型指针，表示可以点击。
+    &:hover, //悬停
+    &:focus {  //选中
+      color: $nav-tabs-link-hover-color;
+    }
+    // Disabled state lightens text
+    &.disabled {
+      color: $nav-link-disabled-color;
+      pointer-events: none;
+      cursor: default;
+      background-color: transparent;
+      border-color: transparent;
+    }
+    &.is-active {
+      color: $nav-tabs-link-active-color;
+    }
+  }
+
+  .nav-line {
+    .tabs-nav-item {
+      &.is-active {
+        border-bottom: $nav-tabs-border-width * 2 solid  $nav-tabs-link-active-color;
+      }   
+    }  
+  }
+  
+  .nav-card {
+    .tabs-nav-item {
+      border: $nav-tabs-border-width solid transparent;
+      margin-bottom: -$nav-tabs-border-width; //将导航项的底部边距设为负值，使导航项“压入”内容区域，与内容视觉上连成一体。
+      &.is-active {
+        @include border-top-radius($nav-tabs-border-radius); //调用 SCSS 的 mixin，为激活状态的导航项设置顶部圆角。
+        background-color: $nav-tabs-link-active-bg;
+        border-color: $nav-tabs-link-active-border-color;
+      }   
+    }  
+  }

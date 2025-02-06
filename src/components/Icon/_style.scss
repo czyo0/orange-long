@@ -1,0 +1,9 @@
+
+
+//使用sass的@each做一个循环
+//用sass的map
+@each $key, $val in $theme-colors{
+    .icon-#{$key}{
+        color: $val;
+    }
+}
