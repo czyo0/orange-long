@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes, ReactElement } from "react";
 import classNames from "classnames";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import Icon from "../Icon/icon";
+import Icon from "../Icon/icon.tsx";
 type InputSize = 'lg' | 'sm'
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>,'size'>{
     disabled?: boolean;

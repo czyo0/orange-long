@@ -27,7 +27,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:storybook/recommended"
     ]
   },
   "browserslist": {
@@ -44,11 +45,22 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@chromatic-com/storybook": "^3.2.4",
+    "@storybook/addon-essentials": "^8.5.3",
+    "@storybook/addon-interactions": "^8.5.3",
+    "@storybook/addon-onboarding": "^8.5.3",
+    "@storybook/blocks": "^8.5.3",
+    "@storybook/preset-create-react-app": "^8.5.3",
+    "@storybook/react": "^8.5.3",
+    "@storybook/react-webpack5": "^8.5.3",
+    "@storybook/test": "^8.5.3",
     "@types/react-transition-group": "^4.4.12",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.5",
+    "eslint-plugin-storybook": "^0.11.2",
     "prop-types": "^15.8.1",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "storybook": "^8.5.3",
     "ts-jest": "^23.10.5",
     "ts-node": "^10.9.2",
     "typescript": "^4.9.5",
