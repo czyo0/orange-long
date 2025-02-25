@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Button,{ButtonSize,ButtonType} from './components/Button/button.tsx';
 import Alert,{AlertType} from './components/Alert/alert.tsx';
 import {  library } from '@fortawesome/fontawesome-svg-core';
 import{fas} from '@fortawesome/free-solid-svg-icons';
-
+import axios from 'axios';
 import Menu from './components/Menu/menu.tsx';
 import MenuItem from './components/Menu/menuItem.tsx';
 import SubMenu from './components/Menu/subMenu.tsx';
@@ -15,9 +15,52 @@ import Transition from './components/Transition/transition.tsx';
 library.add(fas) //添加类型所有图标
 const App:React.FC = () => {
   const [show,setShow]=useState(false)
+  const [title,setTitle]=useState('')
+  const postData = {
+    title: 'my title',
+    body: 'hello'
+  }
+  useEffect(()=> {
+    // axios.get("https://jsonplaceholder.typicode.com/posts/1",{
+    //   headers: {
+    //     'X-Requested-With' : 'XMLHttpRequest',
+    //   },
+    //   responseType: 'json'
+    // })
+    // .then(resp => {
+    //   setTitle(resp.data.title )
+    // })
+    axios.post("https://jsonplaceholder.typicode.com/posts",postData)
+    .then(resp => {
+      setTitle(resp.data.title)
+    })
+  })
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //拿到选择哪些files
+    const files = e.target.files    
+    if(files) {
+      const uploadedFile = files[0]
+      const formData = new FormData()
+      formData.append(uploadedFile.name,uploadedFile)
+      axios.post("https://jsonplaceholder.typicode.com/posts",formData,{
+        headers: {
+          'Content-Type' : 'multipart/form-data'
+        }
+      }).then(resp => {
+        console.log(resp)
+      })
+    }
+  }
   return (
     <div className="App">
       <header className="App-header">
+        <h1>{title}</h1>
+        <div>
+          <input type="file" name="myFile" onChange = {handleFileChange}/>
+        </div>
+
+
+
         <Icon icon="arrow-down" theme="danger" size="10x"/>
 
       <Tabs type="line" defaultIndex={0}>
